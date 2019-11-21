@@ -167,15 +167,15 @@ sol <- bind_rows(sol1, sol2, sol3) %>%
 
 
 ## plot results
-sol %>%
-    ggplot() +
+cpal <- c("#000000","#0072B2","#CC79A7","#D55E00") ## colorblind-friendly palette
+ggplot(sol) +
     aes(x=time, y=v, ymin=v-s, ymax=v+s, colour=species, linetype=species,
         fill=species) +
     geom_line() +
     geom_ribbon(colour=NA, alpha=0.1) +
     facet_grid(attribute~scenario, scales="free_y", switch="y") +
-    scale_colour_manual(name="species", values=c(1, 4, 6, 2)) +
-    scale_fill_manual(name="species", values=c(1, 4, 6, 2)) +
+    scale_colour_manual(name="species", values=cpal) +
+    scale_fill_manual(name="species", values=cpal) +
     scale_linetype_manual(name="species", values=c(1, 1, 2, 2)) +
-    theme_bw() + theme(axis.title.y=element_blank(), legend.position="none")
-
+    theme_bw() +
+    theme(axis.title.y=element_blank(), legend.position="none")
