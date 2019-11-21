@@ -4,18 +4,17 @@ require(tidyverse)
 
 
 ## right hand sides of the dynamical equations (equations 11 and 12 from
-## McPeek 2019 Am Nat; DOI: 10.1086/701629)
+## McPeek 2019 Am Nat; DOI: 10.1086/701629), for the densities
 ## Input:
 ## - time: the moment at which the right hand side is evaluated
 ##         (needed for compatibility; not used)
 ## - state: the state variables, coerced into a vector, in the order:
-##          (R[1], R[2], N[1], N[2], zR[1], zR[2], zN[1], zN[2]),
-##          where R[i] (N[i]) is the density of resource (consumer) i, and
-##          zR[i] (zN[i]) is the trait mean of resource (consumer) i
+##          (R[1], R[2], N[1], N[2]), where R[i] (N[i]) is the density
+##          of resource (consumer) i
 ## - pars: list of model parameters
 ## Output:
 ## - the vector of time derivatives of the dynamical variables, in the same
-##   order as in the state vector (dR[1]/dt, dR[2]/dt, dN[1]/dt, ..., dzN[2]/dt)
+##   order as in the state vector (dR[1]/dt, dR[2]/dt, dN[1]/dt, dN[2]/dt)
 eqs <- function(time, state, pars) {
     R <- state[1:2]
     N <- state[3:4]
@@ -51,9 +50,8 @@ eqs <- function(time, state, pars) {
 ## per capita growth rates of the two consumers
 ## Input:
 ## - state: the state variables, coerced into a vector, in the order:
-##          (R[1], R[2], N[1], N[2], zR[1], zR[2], zN[1], zN[2]),
-##          where R[i] (N[i]) is the density of resource (consumer) i, and
-##          zR[i] (zN[i]) is the trait mean of resource (consumer) i
+##          (R[1], R[2], N[1], N[2]), where R[i] (N[i]) is the density
+##          of resource (consumer) i
 ## - pars: list of model parameters
 pgr <- function(state, pars) {
     R <- state[1:2]
